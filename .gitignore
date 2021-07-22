@@ -1,0 +1,21 @@
+# Development
+compile_commands.json
+*.cmake
+*cache*
+CMakeCache.txt
+CMakeFiles
+.clangd
+*.ast
+
+# Dumps
+*.log
+
+# Binaries
+bin
+*.o
+*.bak
+*.out
+
+# Resources
+*.html
+*.cast
