@@ -107,7 +107,7 @@ void iterate(wchar_t *scr) {
 }
 
 /// Calculate the count of active neighbours surrounding a particular cell
-///  - Despite the game of life existing on an infinite grid, this one wraps
+///  - Despite the game of life existing on an infinite grid, this one wraps...
 int count_neighbours(wchar_t *scr, int y, int x) {
   int neighbours = 0;
   for (int i = -1; i <= 1; i++) {
@@ -133,7 +133,7 @@ int count_neighbours(wchar_t *scr, int y, int x) {
   return neighbours;
 }
 
-/// Draw the full screen buffer to the terminal, line by line
+/// Draw the entire screen buffer to the terminal, line by line
 void draw_full_scr(const wchar_t *scr) {
   wchar_t line_buf[COLS];
   for (int i = 0; i < LINES - 1; i++) {
@@ -143,7 +143,7 @@ void draw_full_scr(const wchar_t *scr) {
   }
 }
 
-/// Draw the message in the message buffer to the last line of the view
+/// Draw the message buffer to the last line of the view
 void draw_msg_buf(char *msg_buf) {
   move(LINES - 1, 0);
   insertln();

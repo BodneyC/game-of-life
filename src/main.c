@@ -30,7 +30,7 @@ void make_backup(wchar_t **scr_bak, wchar_t *scr) {
 ///  - Release in-use memory and terminated screen
 int main(void) {
   if (init_screen() == E_CURSES) {
-    printf("Error when initializing screen");
+    printf("Error when initializing screen\n");
     return E_CURSES;
   }
 
@@ -45,7 +45,7 @@ int main(void) {
   refresh();
 
   bool running = false;
-  bool begin = false;
+  bool begin = true;
 
   char msg_buf[MSG_BUF_LEN];
 
@@ -67,9 +67,9 @@ int main(void) {
     switch (c) {
     case ERR:
       /// No key pressed, do nothing
-      if (!begin) {
+      if (begin) {
         snprintf(msg_buf, MSG_BUF_LEN, "Awaiting input...");
-        begin = true;
+        begin = false;
       }
       break;
 
@@ -97,10 +97,12 @@ int main(void) {
       if (!running) {
         make_backup(&scr_bak, scr);
         if (scr_bak == NULL) {
-          snprintf(msg_buf, MSG_BUF_LEN, "Backup creation failed");
+          snprintf(msg_buf, MSG_BUF_LEN, "Running, backup creation failed");
         } else {
-          snprintf(msg_buf, MSG_BUF_LEN, "Screen has been backed up");
+          snprintf(msg_buf, MSG_BUF_LEN, "Running, screen has been backed up");
         }
+      } else {
+        snprintf(msg_buf, MSG_BUF_LEN, "Stopped running");
       }
       running = !running;
       break;
@@ -118,6 +120,7 @@ int main(void) {
           }
           scr = scr_bak;
           scr_bak = NULL;
+          make_backup(&scr_bak, scr);
           draw_full_scr(scr);
           snprintf(msg_buf, MSG_BUF_LEN, "Screen size unchanged, state reset");
         } else {
@@ -159,9 +162,9 @@ int main(void) {
 
     case KEY_RESIZE: {
       /// The terminal has been resized
-      ///  - scr must be resized while trying to maintain state
-      ///  - lines and cols must be reassigned
-      ///  - The whole screen must be drawn
+      ///  - `scr` must be resized while trying to maintain state
+      ///  - `lines` and `cols` must be reassigned
+      ///  - The whole screen must be redrawn
       if (running) {
         snprintf(msg_buf, MSG_BUF_LEN,
                  "Screen resize while running, results may vary...");
