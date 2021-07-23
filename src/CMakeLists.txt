@@ -1,4 +1,6 @@
 set(SOURCE_FILES
+  ${PROJECT_SOURCE_DIR}/src/cli.c
+  ${PROJECT_SOURCE_DIR}/src/util.c
   ${PROJECT_SOURCE_DIR}/src/screen.c
 )
 
