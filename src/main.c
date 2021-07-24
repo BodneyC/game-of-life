@@ -128,7 +128,7 @@ enum error_codes main_loop(struct parsed_args *args, wchar_t *scr) {
       break;
 
     case 'i':
-      // Perform a single iteration when not running
+      /// Perform a single iteration when not running
       if (running) {
         snprintf(msg_buf, MSG_BUF_LEN, "Cannot iterate while running");
       } else {
@@ -188,6 +188,11 @@ enum error_codes main_loop(struct parsed_args *args, wchar_t *scr) {
         break;
       }
       if (e.bstate == BUTTON1_RELEASED) {
+        if (running) {
+          // A single active box immediately inactivates, so stopping the thing
+          //  running makes sense
+          running = false;
+        }
         flip_by_cords(scr, args, e.y, e.x);
         move(e.y, e.x);
         addnwstr(get_cell(scr, e.y, e.x), 1);
