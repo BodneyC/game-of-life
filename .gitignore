@@ -20,4 +20,3 @@ bin
 *.html
 *.cast
 Makefile
-golc.*
