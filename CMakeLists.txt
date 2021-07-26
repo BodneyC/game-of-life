@@ -14,7 +14,7 @@ find_package(Curses REQUIRED)
 message(STATUS "NCursesW found: ${CURSES_FOUND}")
 
 add_definitions(-DNCURSES_WIDECHAR=1)
-add_compile_definitions(NCURSES_WIDECHAR=1)
+add_compile_definitions(NCURSES_WIDECHAR=1 _XOPEN_SOURCE_EXTENDED=1)
 
 include_directories(
   ${CURSES_INCLUDE_DIR}

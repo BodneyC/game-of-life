@@ -2,7 +2,6 @@
 
 #include "golc.h"
 
-#include <endian.h>
 #include <stdarg.h>
 #include <stdio.h>
 
