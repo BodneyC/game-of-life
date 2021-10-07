@@ -9,7 +9,7 @@
 #include <string.h>
 #include <wchar.h>
 
-#define _GOLC_VERSION "1.0.2"
+#define _GOLC_VERSION "1.0.3"
 
 #define OUTFILE_BUF_SIZE 512
 
