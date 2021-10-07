@@ -187,7 +187,7 @@ enum error_codes main_loop(struct parsed_args *args, wchar_t *scr) {
         ec = E_MOUSE;
         break;
       }
-      if (e.bstate == BUTTON1_RELEASED) {
+      if (e.bstate == BUTTON1_PRESSED) {
         if (running) {
           // A single active box immediately inactivates, so stopping the thing
           //  running makes sense
